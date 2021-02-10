@@ -17,6 +17,17 @@ router.route('/create-student').post((req, res, next) => {
     })
 });
 
+//Get student by username
+router.route('/get-student/:username').get((req,res) => {
+    studentSchema.find({"username":req.params.username}, (error,data) => {
+        if (error) {
+            return next(error)
+        } else {
+            res.json(data);
+        }
+    })
+})
+
 // READ Students
 // router.route('/').get((req, res) => {
 //     studentSchema.find((error, data) => {

@@ -12,7 +12,7 @@ const crypto = require("crypto");
 // Express Route
 const studentRoute = require('../backend/routes/student.routes')
 const adminRoute = require('../backend/routes/admin.routes')
-//const {createError} = require("@typescript-eslint/typescript-estree/dist/node-utils");
+const lecturerRoute = require('../backend/routes/lecturer.routes')
 
 const app = express();
 app.use(bodyParser.json());
@@ -40,6 +40,7 @@ app.use(bodyParser.urlencoded({
 
 app.use('/student', studentRoute)
 app.use('/admin', adminRoute)
+app.use('/lecturer', lecturerRoute)
 
 // Create storage engine
 const storage = new GridFsStorage({
