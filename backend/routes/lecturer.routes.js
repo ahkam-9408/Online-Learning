@@ -28,4 +28,14 @@ router.route('/get-lecturer/:username').get((req,res) => {
     })
 })
 
+router.route('/get-lecturer/:username/:password').get((req,res) => {
+    lecturerSchema.find({"username":req.params.username,"password":req.params.password}, (error,data) => {
+        if (error) {
+            return next(error)
+        } else {
+            res.json(data);
+        }
+    })
+})
+
 module.exports = router;

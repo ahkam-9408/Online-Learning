@@ -13,6 +13,7 @@ const crypto = require("crypto");
 const studentRoute = require('../backend/routes/student.routes')
 const adminRoute = require('../backend/routes/admin.routes')
 const lecturerRoute = require('../backend/routes/lecturer.routes')
+const lectureRoute = require('../backend/routes/lecture.routes')
 
 const app = express();
 app.use(bodyParser.json());
@@ -41,6 +42,7 @@ app.use(bodyParser.urlencoded({
 app.use('/student', studentRoute)
 app.use('/admin', adminRoute)
 app.use('/lecturer', lecturerRoute)
+app.use('/lecture',lectureRoute)
 
 // Create storage engine
 const storage = new GridFsStorage({
@@ -64,11 +66,11 @@ const storage = new GridFsStorage({
 
 const upload = multer({ storage });
 
-app.post("/image/upload-image/", upload.single("img"), (req, res, err) => {
+app.post("/file/upload-file/", upload.single("img"), (req, res, err) => {
     res.send(req.files);
 });
 
-app.get("/image/get-image/:filename", (req, res) => {
+app.get("/file/get-file/:filename", (req, res) => {
     gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
         // Check if file
         if (!file || file.length === 0) {
@@ -79,7 +81,7 @@ app.get("/image/get-image/:filename", (req, res) => {
         }
 
         // Check if image
-        if (file.contentType === "image/jpeg" || file.contentType === "image/png" || file.contentType === "image/jpg") {
+        if (file.contentType === "image/jpeg" || file.contentType === "image/png" || file.contentType === "image/jpg" || file.contentType === "application/pdf") {
             // Read output to browser
             const readstream = gfs.createReadStream(file.filename);
             readstream.pipe(res);

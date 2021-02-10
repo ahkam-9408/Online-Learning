@@ -55,7 +55,7 @@ class AddStudent extends Component{
                 axios.post('http://localhost:4000/student/create-student', userObject)
                     .then(res => alert("Successfully Registered"));
 
-                this.setState({name: '', country: '', username: '', email: '', password: '', confirmPassword: ''});
+                this.setState({stId: '', name: '', username: '', password: '', confirmPassword: ''});
 
                 // this.props.history.push('/');
             })

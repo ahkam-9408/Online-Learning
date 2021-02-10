@@ -55,7 +55,7 @@ class AddLecturer extends Component{
                 axios.post('http://localhost:4000/lecturer/create-lecturer', userObject)
                     .then(res => alert("Successfully Registered"));
 
-                this.setState({name: '', country: '', username: '', email: '', password: '', confirmPassword: ''});
+                this.setState({lecId:'',name: '', username: '', password: '', confirmPassword: ''});
 
                 // this.props.history.push('/');
             })
