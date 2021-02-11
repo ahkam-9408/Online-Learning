@@ -15,6 +15,8 @@ class ViewLectures extends Component{
         if(JSON.parse(sessionStorage.getItem('loggedStudent')) == null)
             this.props.history.push('/');
 
+        this.props.changeLog(true);
+
         axios.get('http://localhost:4000/lecture/')
             .then(res => this.setState({lectures: res.data}))
             .catch(error=> console.log(error))
@@ -35,7 +37,7 @@ class ViewLectures extends Component{
                     this.state.lectures.map((res,id) => {
                         return (<div className={'row my-3'} key={id}>
                             <div className={'col'}>
-                                <div className={'card'}>
+                                <div className={'card bg-info'}>
                                     <div className={'row no-gutters'}>
                                         <div className={'col-auto'}>
                                             {/*<img src={'http://localhost:4000/image/get-image/'+res.imageName}*/}
@@ -48,22 +50,22 @@ class ViewLectures extends Component{
                                                 <div className={'col align-self-center'}>
                                                     <div className={'row my-2'}>
                                                         <div className={'col font-weight-bold'}>
-                                                            {res.subject}
+                                                            Subject: {res.subject}
                                                         </div>
                                                     </div>
                                                     <div className={'row align-items-center'}>
                                                         <div className={'col'}>
-                                                            {res.lectureTopic}
+                                                            Topic: {res.lectureTopic}
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className={'col align-self-center'}>
-                                                    {res.description}
+                                                    Description: {res.description}
                                                 </div>
                                                 <div className={'col align-self-center my-3'}>
                                                     <div className={'row align-items-center'}>
                                                         <div className={'col'}>
-                                                            <button className={'btn btn-primary mx-2 my-2 form-control'} id={`delId${id}`}
+                                                            <button className={'btn btn-outline-dark btn-warning mx-2 my-2 form-control'} id={`delId${id}`}
                                                                     onClick={() => this.onChange(res.documentName)}>
                                                                 View File
                                                             </button>

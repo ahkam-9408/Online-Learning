@@ -20,14 +20,20 @@ class App extends Component {
         super();
 
         this.state = {
-            naviStatus:"student"
+            naviStatus:"student",
+            logStatus:false
         }
 
         this.changeNav = this.changeNav.bind(this);
+        this.changeLog = this.changeLog.bind(this);
     }
 
     changeNav(status) {
         this.setState({naviStatus:status})
+    }
+
+    changeLog(status) {
+        this.setState({logStatus:status})
     }
 
     render() {
@@ -35,21 +41,21 @@ class App extends Component {
             <div className={"container"}>
                 <div className={'row my-3'}>
                     <div className={'col'}>
-                        <NavigationBar naviStatus={this.state.naviStatus}/>
+                        <NavigationBar naviStatus={this.state.naviStatus} logStatus={this.state.logStatus}/>
                     </div>
                 </div>
                 <div className={'row'}>
                     <div className={'col'}>
                         <Switch>
-                            <Route exact path={'/'} render={props => <StudentHome {...props} changeNav={this.changeNav}/>}/>
-                            <Route path={'/admin'} exact render={props => <AdminHome {...props} changeNav={this.changeNav}/>}/>
-                            <Route path={'/admin-add-student'} exact component={AddStudent}/>
-                            <Route path={'/admin-add-lecturer'} exact component={AddLecturer}/>
-                            <Route path={'/lecturer'} exact render={props => <LecturerHome {...props} changeNav={this.changeNav}/>}/>
-                            <Route path={'/lecturer-add-documents'} exact component={AddDocument}/>
-                            <Route path={'/student-view-lecture'} exact component={ViewLectures}/>
-                            <Route path={'/student-view-document'} exact component={ViewDocument}/>
-                            <Route path={'/admin-delete'} exact component={Delete}/>
+                            <Route exact path={'/'} render={props => <StudentHome {...props} changeNav={this.changeNav} changeLog={this.changeLog}/>}/>
+                            <Route path={'/admin'} exact render={props => <AdminHome {...props} changeNav={this.changeNav} changeLog={this.changeLog}/>}/>
+                            <Route path={'/admin-add-student'} exact render={props => <AddStudent {...props} changeLog={this.changeLog}/>}/>
+                            <Route path={'/admin-add-lecturer'} exact render={props => <AddLecturer {...props} changeLog={this.changeLog}/>}/>
+                            <Route path={'/lecturer'} exact render={props => <LecturerHome {...props} changeNav={this.changeNav} changeLog={this.changeLog}/>}/>
+                            <Route path={'/lecturer-add-documents'} exact render={props => <AddDocument {...props} changeLog={this.changeLog}/>}/>
+                            <Route path={'/student-view-lecture'} exact render={props => <ViewLectures {...props} changeLog={this.changeLog}/>}/>
+                            <Route path={'/student-view-document'} exact render={props => <ViewLectures {...props} changeLog={this.changeLog}/>}/>
+                            <Route path={'/admin-delete'} exact render={props => <Delete {...props} changeLog={this.changeLog}/>}/>
                         </Switch>
                     </div>
                 </div>

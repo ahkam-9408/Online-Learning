@@ -14,21 +14,27 @@ class NavigationBar extends Component {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className={'collapse navbar-collapse'} id={'navbarSupportedContent'}>
-                    {(this.props.adminNav === true)?null:(
-                        (JSON.parse(sessionStorage.getItem('loggedUser')) == null)?(
-                            <ul className={'navbar-nav ml-auto'}>
-                                <li className={'nav-item mx-2'}>
-                                    <Link to={'/signup'}>
+                    {(this.props.naviStatus === "admin")?(
+                        (this.props.logStatus === false)?null:(
+                            <ul className="navbar-nav ml-auto">
+                                <li className="nav-item mx-2">
+                                    <Link to={'/admin-add-lecturer'}>
                                         <button type={'button'}
                                                 className={'btn btn-text-light btn-outline-light my-2'}>
-                                            <i className={"fas fa-user-plus"}></i> Sign Up
+                                            <i className="fas fa-list"></i> Booking List
                                         </button>
                                     </Link>
                                 </li>
-                            </ul>):(
-                            <ul className="navbar-nav ml-auto">
                                 <li className="nav-item mx-2">
-                                    <Link to={'/booking-list'}>
+                                    <Link to={'/admin-add-student'}>
+                                        <button type={'button'}
+                                                className={'btn btn-text-light btn-outline-light my-2'}>
+                                            <i className="fas fa-list"></i> Booking List
+                                        </button>
+                                    </Link>
+                                </li>
+                                <li className="nav-item mx-2">
+                                    <Link to={'/admin-delete'}>
                                         <button type={'button'}
                                                 className={'btn btn-text-light btn-outline-light my-2'}>
                                             <i className="fas fa-list"></i> Booking List
@@ -40,7 +46,26 @@ class NavigationBar extends Component {
                                         <button type={'button'}
                                                 className={'btn btn-text-light btn-outline-light my-2'}
                                                 onClick={() => {
-                                                    sessionStorage.removeItem('loggedUser')
+                                                    sessionStorage.removeItem('loggedLecturer')
+                                                    window.location.reload();
+                                                }}>
+                                            <i className="fas fa-sign-out-alt"></i> Logout
+                                        </button>
+                                    </Link>
+                                </li>
+                            </ul>
+
+                        )
+                    ):null}
+                    {(this.props.naviStatus === "student")?(
+                        (this.props.logStatus === false)?null:(
+                            <ul className="navbar-nav ml-auto">
+                                <li className="nav-item mx-2">
+                                    <Link to={'/'}>
+                                        <button type={'button'}
+                                                className={'btn btn-text-light btn-outline-light my-2'}
+                                                onClick={() => {
+                                                    sessionStorage.removeItem('loggedStudent')
                                                     window.location.reload();
                                                 }}>
                                             <i className="fas fa-sign-out-alt"></i> Logout
@@ -49,8 +74,26 @@ class NavigationBar extends Component {
                                 </li>
                             </ul>
                         )
-                    )
-                    }</div>
+                    ):null}
+                    {(this.props.naviStatus === "lecturer")?(
+                        (this.props.logStatus === false)?null:(
+                            <ul className="navbar-nav ml-auto">
+                                <li className="nav-item mx-2">
+                                    <Link to={'/'}>
+                                        <button type={'button'}
+                                                className={'btn btn-text-light btn-outline-light my-2'}
+                                                onClick={() => {
+                                                    sessionStorage.removeItem('loggedLecturer')
+                                                    window.location.reload();
+                                                }}>
+                                            <i className="fas fa-sign-out-alt"></i> Logout
+                                        </button>
+                                    </Link>
+                                </li>
+                            </ul>
+                        )
+                    ):null}
+                </div>
             </div>
         );
     }

@@ -17,6 +17,7 @@ class LecturerHome extends Component{
 
     componentDidMount() {
         this.props.changeNav("lecturer")
+        this.props.changeLog(false);
         sessionStorage.removeItem('loggedStudent')
         sessionStorage.removeItem('loggedAdmin')
     }

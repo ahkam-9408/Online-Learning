@@ -12,6 +12,7 @@ class ViewDocument extends Component {
 
     componentDidMount() {
         let filename = JSON.parse(sessionStorage.getItem('filename'));
+        this.props.changeLog(true);
 
         this.setState({filename:filename})
 
@@ -25,12 +26,11 @@ class ViewDocument extends Component {
     render() {
         return(
             <div className={'col py-2'}>
-                {/*<PDFViewer*/}
-                {/*    document={{*/}
-                {/*        url: ('http://localhost:4000/file/get-file/'+this.state.filename)*/}
-                {/*    }}*/}
-                {/*/>*/}
-                {/*<img src={'http://localhost:4000/file/get-file/'+this.state.filename}/>*/}
+                <PDFViewer
+                    document={{
+                        url: ('http://localhost:4000/file/get-file/'+this.state.filename)
+                    }}
+                />
             </div>
         );
     }

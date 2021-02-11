@@ -21,6 +21,8 @@ class AddDocument extends Component{
     componentDidMount() {
         if(JSON.parse(sessionStorage.getItem('loggedLecturer')) == null)
             this.props.history.push('/lecturer');
+
+        this.props.changeLog(true);
     }
 
     onChangeHandler(e) {

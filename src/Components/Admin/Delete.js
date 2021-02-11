@@ -19,6 +19,8 @@ class Delete extends Component{
     componentDidMount() {
         if(JSON.parse(sessionStorage.getItem('loggedAdmin')) == null)
             this.props.history.push('/admin');
+
+        this.props.changeLog(true);
     }
 
     onSubmit(e){
