@@ -17,6 +17,11 @@ class AdminHome extends Component{
     }
 
     componentDidMount() {
+        this.props.changeNav("admin")
+
+        sessionStorage.removeItem('loggedLecturer')
+        sessionStorage.removeItem('loggedStudent')
+
         axios.get('http://localhost:4000/admin/')
             .then(res => {
                 if(res.data.length == 0){
@@ -48,9 +53,9 @@ class AdminHome extends Component{
                 .then(res => {
                     if(res.data[0].username === username) {
                         alert("Login Successful");
-                        //sessionStorage.setItem('loggedUser',JSON.stringify(res.data[0]._id));
-                        //this.props.history.push('/hotels');
-                        //window.location.reload();
+                        sessionStorage.setItem('loggedAdmin',JSON.stringify(res.data[0]._id));
+                        this.props.history.push('/admin-add-student');
+                        window.location.reload();
                     }
                 })
                 .catch((error) => {

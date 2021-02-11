@@ -15,6 +15,12 @@ class LecturerHome extends Component{
         this.onSubmit = this.onSubmit.bind(this)
     }
 
+    componentDidMount() {
+        this.props.changeNav("lecturer")
+        sessionStorage.removeItem('loggedStudent')
+        sessionStorage.removeItem('loggedAdmin')
+    }
+
     onSubmit(e) {
         e.preventDefault();
 
@@ -27,9 +33,9 @@ class LecturerHome extends Component{
                 .then(res => {
                     if(res.data[0].username === username) {
                         alert("Login Successful");
-                        //sessionStorage.setItem('loggedUser',JSON.stringify(res.data[0]._id));
-                        //this.props.history.push('/hotels');
-                        //window.location.reload();
+                        sessionStorage.setItem('loggedLecturer',JSON.stringify(res.data[0]._id));
+                        this.props.history.push('/lecturer-add-documents');
+                        window.location.reload();
                     }
                 })
                 .catch((error) => {

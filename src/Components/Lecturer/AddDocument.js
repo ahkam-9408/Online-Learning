@@ -18,6 +18,11 @@ class AddDocument extends Component{
         this.onChangeImage = this.onChangeImage.bind(this)
     }
 
+    componentDidMount() {
+        if(JSON.parse(sessionStorage.getItem('loggedLecturer')) == null)
+            this.props.history.push('/lecturer');
+    }
+
     onChangeHandler(e) {
         this.setState({
             [e.target.name]:e.target.value

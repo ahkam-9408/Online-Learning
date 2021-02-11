@@ -15,6 +15,12 @@ class StudentHome extends Component{
         this.onSubmit = this.onSubmit.bind(this)
     }
 
+    componentDidMount() {
+        this.props.changeNav("student");
+        sessionStorage.removeItem('loggedLecturer')
+        sessionStorage.removeItem('loggedStudent')
+    }
+
     onSubmit(e) {
         e.preventDefault();
 
@@ -27,9 +33,9 @@ class StudentHome extends Component{
                 .then(res => {
                     if(res.data[0].username === username) {
                         alert("Login Successful");
-                        //sessionStorage.setItem('loggedUser',JSON.stringify(res.data[0]._id));
-                        //this.props.history.push('/hotels');
-                        //window.location.reload();
+                        sessionStorage.setItem('loggedStudent',JSON.stringify(res.data[0]._id));
+                        this.props.history.push('/student-view-lecture');
+                        window.location.reload();
                     }
                 })
                 .catch((error) => {

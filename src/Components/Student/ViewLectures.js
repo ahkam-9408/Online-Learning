@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import axios from "axios";
+import {Link, Switch} from "react-router-dom";
 
 class ViewLectures extends Component{
     constructor() {
@@ -11,9 +12,17 @@ class ViewLectures extends Component{
     }
 
     componentDidMount() {
+        if(JSON.parse(sessionStorage.getItem('loggedStudent')) == null)
+            this.props.history.push('/');
+
         axios.get('http://localhost:4000/lecture/')
             .then(res => this.setState({lectures: res.data}))
             .catch(error=> console.log(error))
+    }
+
+    onChange(e){
+        sessionStorage.setItem('filename',JSON.stringify(e));
+        this.props.history.push('/student-view-document')
     }
 
     render() {
@@ -54,10 +63,10 @@ class ViewLectures extends Component{
                                                 <div className={'col align-self-center my-3'}>
                                                     <div className={'row align-items-center'}>
                                                         <div className={'col'}>
-                                                            {/*<button className={'btn btn-danger mx-2 my-2 form-control'} id={`delId${id}`}*/}
-                                                            {/*        onClick={() => this.onClickDelete(res._id)}>*/}
-                                                            {/*    Delete*/}
-                                                            {/*</button>*/}
+                                                            <button className={'btn btn-primary mx-2 my-2 form-control'} id={`delId${id}`}
+                                                                    onClick={() => this.onChange(res.documentName)}>
+                                                                View File
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -68,14 +77,14 @@ class ViewLectures extends Component{
                             </div>
                         </div>)
                     })
-                ):(
+                    ):(
                     <h4 className="text-center">
-                        Lecture Content is empty!!!
+                    Lecture Content is empty!!!
                     </h4>
-                )}
-            </div>
-        );
-    }
-}
+                    )}
+                    </div>
+                    );
+                }
+                }
 
-export default ViewLectures;
+    export default ViewLectures;

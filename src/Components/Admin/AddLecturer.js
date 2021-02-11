@@ -18,6 +18,11 @@ class AddLecturer extends Component{
         this.onSubmit = this.onSubmit.bind(this);
     }
 
+    componentDidMount() {
+        if(JSON.parse(sessionStorage.getItem('loggedAdmin')) == null)
+            this.props.history.push('/admin');
+    }
+
     onChangeHandler(e) {
         this.setState({
             [e.target.name]:e.target.value
